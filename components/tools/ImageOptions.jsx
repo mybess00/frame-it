@@ -1,8 +1,11 @@
 'use client'
 
-import { useRef, useState, useEffect} from "react";
+import { useRef, useState, useEffect, useContext} from "react";
+import { TweetProperties } from "../TweetContext";
 
-export default function ImageOptions ({change}) {
+export default function ImageOptions () {
+
+  const { setImageOptions } = useContext(TweetProperties)
 
   const heightManualContainerRef = useRef(null);
   const heightManualInputRef = useRef(null);
@@ -11,7 +14,7 @@ export default function ImageOptions ({change}) {
   const [visibility, setVisibility] = useState(true);
 
   const setImagesOptions = () => {
-    change({width, height, visibility})
+    setImageOptions({width, height, visibility})
   }
 
   const heightSelect = (e) => {

@@ -1,26 +1,28 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+import { TweetProperties } from "../TweetContext";
 
+export default function Size () {
 
-export default function Size ({ change }) {
+  const { setTweetWidth } = useContext(TweetProperties)
 
   const fieldWidthRef = useRef(null);
   const selectWidthRef = useRef(null);
 
   const [widthStatus, setWidthStatus] = useState(true);
   const selectWidth = (e) => {
-    change(e.target.value)
+    setTweetWidth(e.target.value)
   }
   const statusWidth = () => {
     setWidthStatus(!widthStatus);
   }
   const fieldWidth = () => {
-    change(fieldWidthRef.current.value);
+    setTweetWidth(fieldWidthRef.current.value);
   }
 
   useEffect(() => {
     fieldWidthRef.current.disabled = widthStatus;
     selectWidthRef.current.disabled = !widthStatus;
-    widthStatus ? change(selectWidthRef.current.value) : fieldWidth();
+    widthStatus ? setTweetWidth(selectWidthRef.current.value) : fieldWidth();
   });
 
   return(

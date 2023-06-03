@@ -5,17 +5,16 @@ import Profile from './tweet/Profile';
 import TextBody from './tweet/TextBody';
 import BottomBar from './tweet/BottomBar';
 import ImageBody from './tweet/ImageBody';
-import { TweetProperties } from '../app/page';
+import { TweetProperties } from './TweetContext';
 import { hexToRgb } from './options/tweet-options'
 
 
 export default function MainTweet(){
-  const {bgTweet, bgTweetOpacity, tweetPadding, fontColor, fontStyle, borderRadius, borderColor, borderWidth, userName, userID, userImg, tweetText, tweetDate, tweetFav, tweetRetweet, tweetComment, mediaTweet, statsDisplay, imageOptions, textSize} = useContext(TweetProperties);
+  const {bgTweet, bgTweetOpacity, tweetPadding, fontColor, fontStyle, borderRadius, borderColor, borderWidth, statsDisplay, imageOptions, textSize, userName, userID, userImg, tweetText, mediaTweet, tweetFav, tweetRetweet, tweetComment, tweetDate} = useContext(TweetProperties);
   const pElements = Object.values([].slice.call(document.getElementsByTagName('p')));
 
   return (
-    
-      <div className='flex flex-col flex-nowrap gap-2 border-solid'
+    <div className='flex flex-col flex-nowrap gap-2 border-solid'
       style={{
         backgroundColor: `rgba(${hexToRgb(bgTweet)}, ${bgTweetOpacity})`, 
         padding: `${tweetPadding}rem`,

@@ -1,26 +1,29 @@
 'use client'
 
-import { useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef, useContext} from "react";
+import { TweetProperties } from "../TweetContext";
 
-export default function Spacing ({ change }){
+export default function Spacing (){
+
+  const { setTweetPadding, setTweetMargin, setBorderRadius, setBorderColor, setBorderWidth } = useContext(TweetProperties)
 
   const borderColorRef = useRef(null);
   const borderWidthRef = useRef(null);
 
   const paddingTweetInputRange = (e) => {
-    change.getTweetPadding(e.target.value)
+    setTweetPadding(e.target.value)
   }
   const marginTweetInputRange = (e) => {
-    change.getTweetMargin(e.target.value)
+    setTweetMargin(e.target.value)
   }
   const borderRadiusTweet = (e) => {
-    change.getBorderRadius(e.target.value)
+    setBorderRadius(e.target.value)
   }
   const borderColorTweet = (e) => {
-    change.getBorderColor(borderColorRef.current.value)
+    setBorderColor(borderColorRef.current.value)
   }
   const borderWidthTweet = (e) => {
-    change.getBorderWidth(borderWidthRef.current.value)
+    setBorderWidth(borderWidthRef.current.value)
   }
 
   const [borderStatus, setBorderStatus] = useState(true)
@@ -31,8 +34,8 @@ export default function Spacing ({ change }){
     borderWidthRef.current.disabled = borderStatus;
     borderColorRef.current.disabled = borderStatus;
     if (borderStatus){
-      change.getBorderColor('transparent');
-      change.getBorderWidth('0');
+      setBorderColor('transparent');
+      setBorderWidth('0');
     } else {
       borderColorTweet();
       borderWidthTweet();

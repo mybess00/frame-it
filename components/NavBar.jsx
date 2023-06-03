@@ -1,14 +1,53 @@
 'use client'
 
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { BiCloudDownload, BiSearch } from "react-icons/bi"
 import { AiOutlineClose } from "react-icons/ai"
+import { TweetProperties } from "./TweetContext";
 
-export default function NavBar({ downloadAction, searchAction }){
+export default function NavBar({ loader }){
+
+  const { tweetWidth, bgContainer, bgTweet, bgTweetOpacity, tweetMargin, tweetPadding, fontColor, fontStyle, textSize, borderRadius, borderWidth, borderColor, statsDisplay, imageOptions, userName, setUserName, userID, setUserID, userImg, setUserImg, tweetText, setTweetText, tweetFav, setTweetFav, tweetRetweet, setTweetRetweet, tweetComment, setTweetComment, tweetDate, setTweetDate, mediaTweet, setMediaTweet } = useContext(TweetProperties)
+
   const searchBoxRef = useRef(null);
   const closeButtonRef = useRef(null);
   const searchButtonRef = useRef(null);
   const downloadButtonRef = useRef(null);
+
+  const RAPID_API_KEY = process.env.RAPID_API_KEY
+  const FRAME_API_KEY = process.env.FRAME_API_KEY
+
+  const forJson = {
+    tweet: {
+      name: userName,
+      id: userID,
+      img: userImg,
+      text: tweetText,
+      stats: {
+        fav: tweetFav,
+        retweet: tweetRetweet,
+        comment: tweetComment,
+      },
+      date: tweetDate,
+      media: mediaTweet,
+    },
+    theme: {
+      tweetWidth,
+      bgContainer,
+      bgTweet,
+      bgTweetOpacity,
+      tweetMargin,
+      tweetPadding,
+      fontColor,
+      fontStyle,
+      textSize,
+      borderRadius,
+      borderWidth,
+      borderColor,
+      statsDisplay,
+      imageOptions,
+    }
+  }
 
   const openBox = () => {
     searchBoxRef.current.classList.add('active')
@@ -24,7 +63,114 @@ export default function NavBar({ downloadAction, searchAction }){
   const [link, setLink] = useState('');
 
   const handleSubmit = () => {
-    closeButtonRef.current.classList.length !== 0 ? openBox() : searchAction(link);
+    closeButtonRef.current.classList.length !== 0 ? openBox() : printLink(link);
+  }
+
+  const isTwitterLink = (str) => {
+    let regex = /^https:\/\/(www\.|m\.)?twitter\.com\/.+/;
+    return regex.test(str);
+  }
+
+  const getTweetID = (url) => {
+    const regex = /status\/(\d+)/;
+    const match = url.match(regex);
+    if (match) {
+      return match[1];
+    }
+    return null;
+  };
+
+  const handleTweet = (id) => {
+    try {
+      return fetch('http://localhost:3000/twitter-info', {
+        cache: 'default',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'rapid-api-key': RAPID_API_KEY,
+        },
+        body: JSON.stringify({
+          "id": id
+        })
+      }).then(async response => {
+        if(response.ok){
+          const res = await response.json()
+          console.log("Task done!")
+          return res
+        }
+        console.log(false)
+        return false
+      })
+    } catch (error) {
+      console.log('Error: ' + error)
+      return false
+    }
+  }
+
+  const handleDownload = async () => {
+    console.log("Processing...")
+    loader()
+  
+    fetch('http://localhost:3000/frame-tweet', {
+      cache: 'no-store',
+      method: 'POST',
+      body: JSON.stringify({ forJson }),
+      headers: {
+        'Content-Type': 'application/json',
+        'frame-api-key': FRAME_API_KEY,
+      }
+    }).then(response => {
+      console.log("Waiting for response")
+      if (response.ok){
+        console.log("Trying to download...")
+        const dispositionHeader = response.headers.get('Content-Disposition');
+        const match = dispositionHeader && dispositionHeader.match(/filename="(.+)"/);
+        const fileName = match ? match[1] : 'image.jpg';
+        
+        return response.blob().then((blob) => {
+          const downloadLink = document.createElement('a');
+          downloadLink.href = URL.createObjectURL(blob);
+          downloadLink.download = fileName;
+
+          downloadLink.click();
+
+          URL.revokeObjectURL(downloadLink.href);
+          console.log("Download Finish")
+          loader()
+        })
+      } else {
+        loader()
+        return console.log(response)
+
+      }
+    })
+  }
+
+  const printLink = async (link) => {
+    setName(link)
+    if (isTwitterLink(link)){
+      const id = getTweetID(link)
+      loader()
+      console.log("Getting tweet with ID:  " + id)
+      const { tweet } = await handleTweet(id);
+      if (tweet.data) {
+        setUserName(tweet.data.user_name);
+        setUserID(tweet.data.user_id);
+        setTweetText(tweet.data.tweet);
+        setTweetComment(tweet.data.comment);
+        setTweetFav(tweet.data.fav);
+        setTweetRetweet(tweet.data.retweet);
+        setUserImg(tweet.data.user_image);
+        setTweetDate(tweet.data.date);
+        setMediaTweet(tweet.data.media);
+        console.log(tweet.data);
+      } else {
+        alert('Ha ocurrido un error al intentar obtener el tweet.')
+      }
+      loaderScreen.current.classList.add('hidden');
+    } else {
+      alert('El enlace ingresado no es correcto');
+    }
   }
 
   return (
@@ -32,7 +178,7 @@ export default function NavBar({ downloadAction, searchAction }){
         <a className="font-logo text-4xl" onClick={() => console.log(closeButtonRef.current.classList.length)}>Frame it!</a>
         <div className="relative flex justify-center items-center cursor-pointer z-10 gap-2">
           <div ref={downloadButtonRef}>
-            <BiCloudDownload fontSize='2rem' onClick={downloadAction}/>
+            <BiCloudDownload fontSize='2rem' onClick={handleDownload}/>
           </div>
           <div ref={closeButtonRef} className='hidden'>
             <AiOutlineClose onClick={closeBox} fontSize='2rem'/>

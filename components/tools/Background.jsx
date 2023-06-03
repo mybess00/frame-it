@@ -1,9 +1,11 @@
 'use client'
 
-import React from 'react'
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { TweetProperties } from "../TweetContext";
 
-export default function Background({ change }){
+export default function Background(){
+
+  const { setBgContainer } = useContext(TweetProperties)
 
   const hyperRef = useRef(null);
   const oceanicRef = useRef(null);
@@ -21,11 +23,11 @@ export default function Background({ change }){
 
   const backgroundContainerInputColor = (e)=>{
     const colorBg = e.target.value;
-    change(`linear-gradient(90deg, ${colorBg}, ${colorBg})`)
+    setBgContainer(`linear-gradient(90deg, ${colorBg}, ${colorBg})`)
   }
   const backgroundColorContainerGradient = (elementRef) => {
     const style =  window.getComputedStyle(elementRef.current).getPropertyValue('background-image')
-    change(style);
+    setBgContainer(style);
 
   }
 

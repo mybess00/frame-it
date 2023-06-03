@@ -8,50 +8,7 @@ import Spacing from "./tools/Spacing";
 import Size from "./tools/Size";
 import ImageOptions from "./tools/ImageOptions";
 
-export default function ToolBox({ change }){
-
-  const getBackgroundContainer = (value) => {
-    change.setContainerBackground(value);
-  }
-  const getBackgroundTweet = (value) => {
-    change.setTweetBackground(value);
-  }
-  const getBackgroundTweetOpacity = (value) => {
-    change.setTweetBackgroundOpacity(value)
-  }
-  const getTweetPadding = (value) => {
-    change.setTweetPaddingValue(value);
-  }
-  const getTweetMargin = (value) => {
-    change.setTweetMarginValue(value);
-  }
-  const getFontColor = (value) => {
-    change.setFontTweetColor(value);
-  }
-  const getFontStyle = (value) => {
-    change.setFontTweetStyle(value)
-  }
-  const getBorderRadius = (value) => {
-    change.setBorderTweetRadius(value)
-  }
-  const getBorderColor = (value) => {
-    change.setBorderTweetColor(value)
-  }
-  const getBorderWidth = (value) => {
-    change.setBorderTweetWidth(value)
-  }
-  const getTweetWidth = (value) => {
-    change.setWidth(value);
-  }
-  const getStatsDisplay = (value) => {
-    change.setStatsVisibility(value);
-  }
-  const getImageOptions = (value) => {
-    change.setImageTweetOptions(value);
-  }
-  const getTextSize = (value) => {
-    change.setGlobalTextSize(value);
-  }
+export default function ToolBox(){
 
   const btnBgRef = useRef(null);
   const btnMarginRef = useRef(null);
@@ -151,20 +108,20 @@ export default function ToolBox({ change }){
         </label>
       </div>
       <div className="hidden" ref={backgroundContainerRef}>
-        <Background change={getBackgroundContainer}/>
-        <BackgroundTweet change={{getBackgroundTweet, getBackgroundTweetOpacity, getStatsDisplay}}/>
+        <Background />
+        <BackgroundTweet />
       </div>
       <div className="hidden" ref={spacingContainerRef}>
-        <Spacing change={{getTweetPadding, getTweetMargin, getBorderRadius, getBorderColor, getBorderWidth}}/>
+        <Spacing />
       </div>
       <div className="hidden" ref={fontContainerRef}>
-        <Fonts change={{getFontColor, getFontStyle, getTextSize}}/>
+        <Fonts />
       </div>
       <div className="hidden" ref={imageContainerRef}>
-        <ImageOptions change={getImageOptions}/>
+        <ImageOptions />
       </div>
       <div className="hidden" ref={sizeContainerRef}>
-        <Size change={getTweetWidth}/>
+        <Size />
       </div>
     </div>
   );

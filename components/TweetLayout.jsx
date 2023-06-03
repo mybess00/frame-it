@@ -1,11 +1,14 @@
 'use client'
 import InfiniteViewer from 'react-infinite-viewer';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { HiOutlineZoomIn, HiOutlineZoomOut } from 'react-icons/hi'
 import { TbKeyframeAlignCenter } from 'react-icons/tb'
+import { TweetProperties } from './TweetContext';
 
 
 export default function TweetLayout ({ children }) {
+
+    const { bgContainer, tweetMargin, tweetWidth } = useContext(TweetProperties)
     
     const [zoom, setZoom] = useState(1)
     const viewerRef = useRef(null)
@@ -47,7 +50,13 @@ export default function TweetLayout ({ children }) {
                 threshold={0}
                 rangeX={[-2048, 2048]}
                 rangeY={[-2048, 2048]}>
-                    {children}
+                    <div className='body-tweet viewport cursor-grab active:cursor-grabbing duration-[50ms]' style={{
+                        backgroundImage: bgContainer, 
+                        padding: `${tweetMargin}rem`,
+                        width: `${tweetWidth}px`,
+                    }}>
+                        {children}
+                    </div>
                 </InfiniteViewer>
         </div>
     )

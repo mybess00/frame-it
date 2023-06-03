@@ -1,15 +1,20 @@
 'use client'
 
-export default function BackgroundTweet({ change }){
+import { useContext } from "react";
+import { TweetProperties } from "../TweetContext";
+
+export default function BackgroundTweet(){
+
+  const { setBgTweet, setBgTweetOpacity, setStatsDisplay } = useContext(TweetProperties)
 
   const backgroundTweetInputColor = (e) => {
-    change.getBackgroundTweet(e.target.value)
+    setBgTweet(e.target.value)
   }
   const opacityTweetInputRange = (e) => {
-    change.getBackgroundTweetOpacity(e.target.value/100)
+    setBgTweetOpacity(e.target.value/100)
   }
   const statsDisplay = (e) => {
-    change.getStatsDisplay(e.target.checked ? 'hidden' : '');
+    setStatsDisplay(e.target.checked ? 'hidden' : '');
   }
 
   return (

@@ -1,22 +1,25 @@
 'use client'
 
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { TweetProperties } from "../TweetContext";
 
-export default function Fonts({ change }){
+export default function Fonts(){
+
+  const { setFontColor,  setFontStyle, setTextSize } = useContext(TweetProperties)
 
   const italicInputRef = useRef(null);
   const boldInputRef = useRef(null);
 
   const fontColorInputColor = (e) => {
-    change.getFontColor(e.target.value)
+    setFontColor(e.target.value)
   }
   const fontStyleInputsChackbox = () => {
     const italic = italicInputRef.current.checked;
     const bold = boldInputRef.current.checked;
-    change.getFontStyle({"bold": bold, "italic": italic})
+    setFontStyle({"bold": bold, "italic": italic})
   }
   const textSizeInput = (e) => {
-    change.getTextSize(e.target.value);
+    setTextSize(e.target.value);
   }
   return (
     <div className="mt-7">

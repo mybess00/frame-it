@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { TweetProperties } from '../../app/page'
+import { TweetProperties } from "../TweetContext";
 import { FaRegComment } from 'react-icons/fa'
 import { AiOutlineRetweet } from 'react-icons/ai'
 import { MdOutlineFavoriteBorder } from 'react-icons/md'
