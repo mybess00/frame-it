@@ -21,7 +21,7 @@ export default function MainTweet(){
         borderRadius: `${borderRadius}px`,
         borderColor: borderColor,
         borderWidth: `${borderWidth}px`,
-        fontSize: `${textSize-10}px`
+        fontSize: `${textSize-10}px`,
         }}>
         <Profile userName={userName} userID={userID} profileImage={userImg}/>
         <TextBody text={tweetText}/>

@@ -52,7 +52,7 @@ export async function POST ( request ) {
 
   } catch (error) {
 
-    console.log("EEEEEEEE" + error)
+    console.log("ERROR" + error)
     return NextResponse.json(error)
 
   }
