@@ -7,8 +7,6 @@ import MainTweet from '../components/MainTweet';
 import TweetLayout from '../components/TweetLayout';
 import Modal from '../components/Modal'
 
-export const TweetProperties = createContext();
-
 export default function Home() {
 
   const [bgContainer, setBgContainer] = useState('linear-gradient(to right, rgb(236, 72, 153), rgb(239, 68, 68), rgb(234, 179, 8))');
@@ -219,4 +217,6 @@ export default function Home() {
     </TweetProperties.Provider>
   )
 }
+
+export const TweetProperties = createContext();
 
