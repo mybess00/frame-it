@@ -32,7 +32,7 @@ import { highlightTweet, formatNumber, formatDate, formatTextBody } from './opti
   if (props.tweet.media) {
     const mediaArrLength = props.tweet.media.length;
     imgTweet = props.tweet.media.map((element, index) => {
-      return  <div style={{display: 'flex', height: heightImages === '100%' ? 'auto' : heightImages, width: widthImages === 'auto' ? mediaArrLength == 1 || (mediaArrLength == 3 && index == 2) ? '100%' : '49%' : '100%', overflow: 'hidden', borderRadius: '0.75rem', marginTop: '10px'}}>
+      return  <div key={`image${index}`} style={{display: 'flex', height: heightImages === '100%' ? 'auto' : heightImages, width: widthImages === 'auto' ? mediaArrLength == 1 || (mediaArrLength == 3 && index == 2) ? '100%' : '49%' : '100%', overflow: 'hidden', borderRadius: '0.75rem', marginTop: '10px'}}>
                 <img style={{ borderRadius: '0.75rem', objectFit: 'cover', width: '100%'}} src={element}/>
               </div>
     })
