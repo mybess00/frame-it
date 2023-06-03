@@ -1,6 +1,6 @@
 export default function ImageBody({ img, options }){
   if (!img) {
-    return <></>
+    return <div></div>
   }
   return(
     <div className={`${options.visibility ? 'flex' : 'hidden'} flex-wrap flex-row justify-between gap-y-4 mt-3 `}>
