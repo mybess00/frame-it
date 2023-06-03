@@ -1,0 +1,54 @@
+'use client'
+import InfiniteViewer from 'react-infinite-viewer';
+import { useState, useRef, useEffect } from 'react';
+import { HiOutlineZoomIn, HiOutlineZoomOut } from 'react-icons/hi'
+import { TbKeyframeAlignCenter } from 'react-icons/tb'
+
+
+export default function TweetLayout ({ children }) {
+    
+    const [zoom, setZoom] = useState(1)
+    const viewerRef = useRef(null)
+
+    const zoomIn = () => {
+        setZoom(zoom+0.1)
+    }
+    const zoomOut = () => {
+        setZoom(zoom <= 0.4 ? zoom-0.05 : zoom-0.1)
+    }
+    const center = () => {
+        viewerRef.current.scrollCenter()
+    }
+
+    return (
+        <div className='container-tweet flex flex-col left-0 w-3/5 h-screen overflow-y-auto bg-space-work items-center justify-center'>
+            <div className='sticky sm:absolute left-[80%] sm:left-[unset] sm:right-[5%] top-[10%] z-10 flex flex-row gap-2'>
+                <div className='text-3xl sm:text-2xl text-bg-500 desktop:hover:bg-gray-500 transition-all duration-200 bg-c-secondary p-2 rounded-full cursor-pointer'
+                    onClick={center}>
+                    <TbKeyframeAlignCenter/>
+                </div>
+                <div className='text-3xl sm:text-2xl text-bg-500 desktop:hover:bg-gray-500 transition-all duration-200 bg-c-secondary p-2 rounded-full cursor-pointer'
+                    onClick={zoomIn}>
+                    <HiOutlineZoomIn/>
+                </div>
+                <div className='text-3xl sm:text-2xl text-bg-500 desktop:hover:bg-gray-500 transition-all duration-200 bg-c-secondary p-2 rounded-full cursor-pointer'
+                    onClick={zoomOut}>
+                    <HiOutlineZoomOut/>
+                </div>
+            </div>
+                <InfiniteViewer
+                ref={viewerRef}
+                className="viewer w-full h-full"
+                margin={0}
+                zoom={zoom}
+                useWheelScroll={true}
+                useGesture={true}
+                useMouseDrag={true}
+                threshold={0}
+                rangeX={[-2048, 2048]}
+                rangeY={[-2048, 2048]}>
+                    {children}
+                </InfiniteViewer>
+        </div>
+    )
+}

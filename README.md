@@ -1,34 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frame it!
 
-## Getting Started
+Frame it is a web application that allows you to frame and customize your favorite tweets in a simple way. You can choose from various layouts and customization options to make your tweets unique. Once you've created your design, you can download your custom tweet as a PNG file and share it on other social networks. Make your tweets stand out with Frame it!
 
-First, run the development server:
+## Available options
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Personalization Options 🎨:
+✅ Background of the tweet and photo (includes gradients and solid colors).  
+✅ Margins and borders.  
+✅ Support emojis.  
+✅ Font size, style and color.  
+✅ Size and layout of the tweet images.  
+✅ Size of the image that is exported. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Pending Updates ⏸:
+⌛ Add badges for hashtags (#), links, and usernames.  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Future ideas 💡:
+🚀 Telegram bot.  
+🚀 Share directly with other social networks.  
+🚀 Multiple font family options.  
+🚀 Add support for Twitter threads.  
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Dev information:
 
-## Learn More
+### Tech stack 💻:
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js
+- [Tailwindcss](https://tailwindcss.com/)
+- [daisyUI](https://daisyui.com/)
+- [satori](https://github.com/vercel/satori)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Other information 📄:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Within the `components/options` folder are functions used for the operation of the app. Within `components/tools` is the configuration of all available customization tools; and inside `components/tweet` you can find the tweet preview components.  
 
-## Deploy on Vercel
+`TweetMockup.jsx` contains all the HTML elements that are converted to SVG using the satori library.  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[Satori](https://github.com/vercel/satori) is the library of choice used to convert HTML to SVG.  
