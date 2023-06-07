@@ -8,10 +8,8 @@ import ImageBody from './tweet/ImageBody';
 import { TweetProperties } from './TweetContext';
 import { hexToRgb } from './options/tweet-options'
 
-
 export default function MainTweet(){
   const {bgTweet, bgTweetOpacity, tweetPadding, fontColor, fontStyle, borderRadius, borderColor, borderWidth, statsDisplay, imageOptions, textSize, userName, userID, userImg, tweetText, mediaTweet, tweetFav, tweetRetweet, tweetComment, tweetDate} = useContext(TweetProperties);
-  const pElements = Object.values([].slice.call(document.getElementsByTagName('p')));
 
   return (
     <div className='flex flex-col flex-nowrap gap-2 border-solid'
@@ -23,16 +21,10 @@ export default function MainTweet(){
         borderWidth: `${borderWidth}px`,
         fontSize: `${textSize-10}px`,
         }}>
-        <Profile userName={userName} userID={userID} profileImage={userImg}/>
-        <TextBody text={tweetText}/>
-        {pElements.forEach(element => {
-          const elementStyle = element.style;
-          elementStyle.color = fontColor;
-          elementStyle.fontStyle = fontStyle.italic ? 'italic' : '';
-          elementStyle.fontWeight = fontStyle.bold ? 'bold' : '400';
-        })}
+        <Profile userName={userName} userID={userID} profileImage={userImg} fontColor={fontColor} fontStyle={fontStyle}/>
+        <TextBody text={tweetText} fontColor={fontColor} fontStyle={fontStyle}/>
         <ImageBody img={mediaTweet} options={imageOptions}/>
-        <BottomBar favCount={tweetFav} rtCount={tweetRetweet} commentCount={tweetComment} date={tweetDate} statsVisibility={statsDisplay}/>
+        <BottomBar favCount={tweetFav} rtCount={tweetRetweet} commentCount={tweetComment} date={tweetDate} statsVisibility={statsDisplay} fontColor={fontColor} fontStyle={fontStyle}/>
       </div>
   );
 }

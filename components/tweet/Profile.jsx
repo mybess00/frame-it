@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-export default function Profile ({ userName, userID, profileImage }){
+export default function Profile ({ userName, userID, profileImage, fontColor, fontStyle }){
+
   return (
     <div className="flex flex-row justify-between gap-2">
       <div className="flex flex-row justify-start gap-2">
@@ -10,8 +11,20 @@ export default function Profile ({ userName, userID, profileImage }){
           </div>
         </div>
         <div className="flex flex-col flex-nowrap">
-          <p className="text-[#000]">{userName}</p>
-          <p className="text-[#000]">@{userID}</p>
+          <p style={{
+            color: fontColor,
+            fontStyle: fontStyle.italic ? 'italic' : '',
+            fontWeight: fontStyle.bold ? 'bold' : '400'
+            }}>
+              {userName}
+          </p>
+          <p style={{
+            color: fontColor,
+            fontStyle: fontStyle.italic ? 'italic' : '',
+            fontWeight: fontStyle.bold ? 'bold' : '400'
+            }}>
+              @{userID}
+          </p>
         </div>
       </div>
     </div>
