@@ -82,7 +82,7 @@ export default function NavBar({ loader }){
 
   const handleTweet = (id) => {
     try {
-      return fetch('http://localhost:3000/twitter-info', {
+      return fetch('https://frame-it-app.vercel.app/twitter-info', {
         cache: 'default',
         method: 'POST',
         headers: {
@@ -110,8 +110,7 @@ export default function NavBar({ loader }){
   const handleDownload = async () => {
     console.log("Processing...")
     loader()
-  
-    fetch('http://localhost:3000/frame-tweet', {
+    fetch('https://frame-it-app.vercel.app/frame-tweet', {
       cache: 'no-store',
       method: 'POST',
       body: JSON.stringify({ forJson }),
