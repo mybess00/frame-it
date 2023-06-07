@@ -146,7 +146,7 @@ export default function NavBar({ loader }){
   }
 
   const printLink = async (link) => {
-    setName(link)
+    //setName(link)
     if (isTwitterLink(link)){
       const id = getTweetID(link)
       loader()
