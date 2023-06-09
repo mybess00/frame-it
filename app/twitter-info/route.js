@@ -16,7 +16,7 @@ const parsedImages = ( obj ) => {
 export async function POST ( request ) {
 
   const res = await request.json()
-  const RAPID_API_KEY = await request.headers.get('rapid-api-key')
+  const RAPID_API_KEY = process.env.RAPID_API_KEY
 
   try {
     const response = await fetch(`https://twitter135.p.rapidapi.com/v2/TweetDetail/?id=${res.id}`, {
@@ -48,11 +48,12 @@ export async function POST ( request ) {
           }
       }
 
+    console.log(tweet)  
     return NextResponse.json({ tweet })
 
   } catch (error) {
 
-    console.log("ERROR" + error)
+    console.log("ERROR BCK " + error)
     return NextResponse.json(error)
 
   }

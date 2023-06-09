@@ -33,11 +33,6 @@ const font = (style) => {
 
 export async function POST ( request ) {
   
-  const X_API_KEY = request.headers.get('frame-api-key')
-  if (!X_API_KEY === process.env.FRAME_API_KEY){
-    return NextResponse.json({'Error': 'API KEY NOT FOUND'})
-  }
-
   const res = await request.json();
   const fontType = font(res.forJson.theme.fontStyle)
 

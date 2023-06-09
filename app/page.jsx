@@ -11,14 +11,17 @@ export default function Home() {
 
   const loaderScreen = useRef(null);
 
-  const handleLoader = () => {
-    loaderScreen.current.classList.toggle('hidden');
+  const showLoader = () => {
+    loaderScreen.current.classList.remove('hidden');
+  }
+  const hideLoader = () => {
+    loaderScreen.current.classList.add('hidden');
   }
 
   return (
     <TweetContext>
       <div className="App flex flex-row">
-        <NavBar loader={handleLoader}/>
+        <NavBar loader={{showLoader, hideLoader}}/>
         <TweetLayout>
           <MainTweet />  
         </TweetLayout>

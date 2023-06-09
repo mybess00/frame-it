@@ -14,9 +14,6 @@ export default function NavBar({ loader }){
   const searchButtonRef = useRef(null);
   const downloadButtonRef = useRef(null);
 
-  const RAPID_API_KEY = process.env.RAPID_API_KEY
-  const FRAME_API_KEY = process.env.FRAME_API_KEY
-
   const forJson = {
     tweet: {
       name: userName,
@@ -81,42 +78,40 @@ export default function NavBar({ loader }){
   };
 
   const handleTweet = (id) => {
-    try {
-      return fetch('https://frame-it-app.vercel.app/twitter-info', {
-        cache: 'default',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'rapid-api-key': RAPID_API_KEY,
-        },
-        body: JSON.stringify({
-          "id": id
-        })
-      }).then(async response => {
-        if(response.ok){
-          const res = await response.json()
-          console.log("Task done!")
-          return res
-        }
-        console.log(false)
-        return false
+    return fetch('https://frame-it-app.vercel.app/twitter-info', {
+      cache: 'default',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "id": id
       })
-    } catch (error) {
-      console.log('Error: ' + error)
+    }).then(async response => {
+      if(response.ok){
+        const res = await response.json()
+        console.log("Task done!")
+        return res
+      }
+      console.log(false)
       return false
-    }
+    })
+    .catch((err) => {
+      loader.hideLoader()
+      console.log('Error: ' + err)
+      return false
+    })
   }
 
   const handleDownload = async () => {
     console.log("Processing...")
-    loader()
+    loader.showLoader()
     fetch('https://frame-it-app.vercel.app/frame-tweet', {
       cache: 'no-store',
       method: 'POST',
       body: JSON.stringify({ forJson }),
       headers: {
         'Content-Type': 'application/json',
-        'frame-api-key': FRAME_API_KEY,
       }
     }).then(response => {
       console.log("Waiting for response")
@@ -135,10 +130,10 @@ export default function NavBar({ loader }){
 
           URL.revokeObjectURL(downloadLink.href);
           console.log("Download Finish")
-          loader()
+          loader.hideLoader()
         })
       } else {
-        loader()
+        loader.hideLoader()
         return console.log(response)
 
       }
@@ -146,13 +141,13 @@ export default function NavBar({ loader }){
   }
 
   const printLink = async (link) => {
-    //setName(link)
     if (isTwitterLink(link)){
       const id = getTweetID(link)
-      loader()
+      loader.showLoader()
       console.log("Getting tweet with ID:  " + id)
-      const { tweet } = await handleTweet(id);
-      if (tweet.data) {
+      const  { tweet }  = await handleTweet(id);
+      console.log(tweet)
+      try {
         setUserName(tweet.data.user_name);
         setUserID(tweet.data.user_id);
         setTweetText(tweet.data.tweet);
@@ -163,10 +158,11 @@ export default function NavBar({ loader }){
         setTweetDate(tweet.data.date);
         setMediaTweet(tweet.data.media);
         console.log(tweet.data);
-      } else {
-        alert('Ha ocurrido un error al intentar obtener el tweet.')
+        loader.hideLoader()
+      } catch (error) {
+        loader.hideLoader()
+        alert('Error: ' + error)
       }
-      loaderScreen.current.classList.add('hidden');
     } else {
       alert('El enlace ingresado no es correcto');
     }

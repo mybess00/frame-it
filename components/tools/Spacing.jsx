@@ -48,11 +48,11 @@ export default function Spacing (){
         <h2 className="text-center">Margins</h2>
         <div className="dualInputContainer my-3 items-center justify-around">
           <label className="flex-1">Tweet Margin</label>
-          <input type='range' className="range range-primary flex-1" min='0' max='5' defaultValue='2.25' step='0.1' onChange={marginTweetInputRange}/>
+          <input type='range' className="range range-primary flex-1" min='0' max='7.5' defaultValue='2.25' step='0.1' onChange={marginTweetInputRange}/>
         </div>
         <div className="dualInputContainer my-3 items-center justify-around">
           <label className="flex-1">Tweet Padding</label>
-          <input type='range' className="range range-primary flex-1" min='0' max='5' defaultValue='2.50' step='0.1' onChange={paddingTweetInputRange}/>
+          <input type='range' className="range range-primary flex-1" min='0' max='7.5' defaultValue='2.50' step='0.1' onChange={paddingTweetInputRange}/>
         </div>
       </div>
       <div>
@@ -60,7 +60,7 @@ export default function Spacing (){
         <div>
           <div className="dualInputContainer my-3 items-center justify-around">
             <label className="flex-1">Border Radius</label>
-            <input type='range' className="range range-primary flex-1" min='0' max='50' defaultValue='20' step='1' onChange={borderRadiusTweet}/>
+            <input type='range' className="range range-primary flex-1" min='0' max='70' defaultValue='20' step='1' onChange={borderRadiusTweet}/>
           </div>
           <div className="dualInputContainer my-3 items-center justify-around gap-3">
             <b>No Borders</b>

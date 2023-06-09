@@ -10,7 +10,7 @@ export default function TweetLayout ({ children }) {
 
     const { bgContainer, tweetMargin, tweetWidth } = useContext(TweetProperties)
     
-    const [zoom, setZoom] = useState(1)
+    const [zoom, setZoom] = useState(.5)
     const viewerRef = useRef(null)
 
     const zoomIn = () => {
