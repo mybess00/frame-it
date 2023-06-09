@@ -59,7 +59,7 @@ export default function Size () {
         <div className="dualInputContainer my-3 items-center justify-around gap-3">
             <b className="flex-1">Width</b>
             <div className="w-3/4">
-              <input type='number' disabled ref={fieldWidthRef} onChange={fieldWidth} defaultValue="1600" className="text-bg-900 rounded-md p-1"/>
+              <input type='number' disabled ref={fieldWidthRef} onChange={fieldWidth} defaultValue="1600" className="text-[#021018] rounded-md p-1"/>
             </div>
         </div>
       </div>

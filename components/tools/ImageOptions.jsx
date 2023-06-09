@@ -59,7 +59,7 @@ export default function ImageOptions () {
         <div className="flex-row flex-nowrap my-3 items-center justify-around gap-3 hidden" ref={heightManualContainerRef}>
           <b className="flex-1">Set Height</b>
           <div className="w-3/4">
-            <input type='number' defaultValue='380' className="text-bg-900 rounded-md p-1" onChange={setManualHeight} ref={heightManualInputRef}/>
+            <input type='number' defaultValue='380' className="text-[#021018] rounded-md p-1" onChange={setManualHeight} ref={heightManualInputRef}/>
           </div>
         </div>
         <div className="dualInputContainer my-3 items-center justify-around gap-3">

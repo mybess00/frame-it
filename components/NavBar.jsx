@@ -169,7 +169,7 @@ export default function NavBar({ loader }){
   }
 
   return (
-    <div className="topBar absolute top-0 left-0 w-full h-16 py-5 px-4 flex justify-between items-center bg-bg-900 z-[999]">
+    <div className="topBar absolute top-0 left-0 w-full h-16 py-5 px-4 flex justify-between items-center bg-[#021018] z-[999]">
         <a className="font-logo text-4xl" onClick={() => console.log(closeButtonRef.current.classList.length)}>Frame it!</a>
         <div className="relative flex justify-center items-center cursor-pointer z-10 gap-2">
           <div ref={downloadButtonRef}>

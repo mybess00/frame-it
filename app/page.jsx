@@ -25,7 +25,7 @@ export default function Home() {
         <TweetLayout>
           <MainTweet />  
         </TweetLayout>
-        <div className='container-tools pt-20 px-6 right-0 w-2/5 h-screen overflow-y-auto overflow-x-clip shadow-lg shadow-bg-100'>
+        <div className='container-tools pt-20 px-6 right-0 w-2/5 h-screen overflow-y-auto overflow-x-clip shadow-lg shadow-[#062b43]'>
           <ToolBox />
         </div>
       </div>
