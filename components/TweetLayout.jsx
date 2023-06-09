@@ -1,6 +1,6 @@
 'use client'
 import InfiniteViewer from 'react-infinite-viewer';
-import { useState, useRef, useContext } from 'react';
+import { useRef, useContext } from 'react';
 import { HiOutlineZoomIn, HiOutlineZoomOut } from 'react-icons/hi'
 import { TbKeyframeAlignCenter } from 'react-icons/tb'
 import { TweetProperties } from './TweetContext';
@@ -10,13 +10,18 @@ export default function TweetLayout ({ children }) {
 
     const { bgContainer, tweetMargin, tweetWidth } = useContext(TweetProperties)
     
-    const [zoom, setZoom] = useState(.5)
     const viewerRef = useRef(null)
 
+    const setZoom = (zoom) => {
+        viewerRef.current.setZoom(zoom)
+    }
+
     const zoomIn = () => {
+        let zoom = viewerRef.current.getZoom()
         setZoom(zoom+0.1)
     }
     const zoomOut = () => {
+        let zoom = viewerRef.current.getZoom()
         setZoom(zoom <= 0.4 ? zoom-0.05 : zoom-0.1)
     }
     const center = () => {
@@ -43,13 +48,14 @@ export default function TweetLayout ({ children }) {
                 ref={viewerRef}
                 className="viewer w-full h-full"
                 margin={0}
-                zoom={zoom}
                 useWheelScroll={true}
+                usePinch={true}
                 useGesture={true}
                 useMouseDrag={true}
                 threshold={0}
                 rangeX={[-2048, 2048]}
-                rangeY={[-2048, 2048]}>
+                rangeY={[-2048, 2048]}
+                zoom={.5}>
                     <div className='body-tweet viewport cursor-grab active:cursor-grabbing duration-[50ms]' style={{
                         backgroundImage: bgContainer, 
                         padding: `${tweetMargin}rem`,
