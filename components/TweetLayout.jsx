@@ -44,6 +44,7 @@ export default function TweetLayout ({ children }) {
                 ref={viewerRef}
                 className="viewer w-full h-full"
                 margin={0}
+                usePinch={true}
                 useWheelScroll={true}
                 useGesture={true}
                 useMouseDrag={true}

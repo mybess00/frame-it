@@ -17,7 +17,7 @@ export async function POST ( request ) {
 
   const res = await request.json()
   const RAPID_API_KEY = process.env.RAPID_API_KEY
-
+  
   try {
     const response = await fetch(`https://twitter135.p.rapidapi.com/v2/TweetDetail/?id=${res.id}`, {
       method: 'GET', 
