@@ -10,7 +10,11 @@ const nextConfig = {
                 headers: [
                     {
                         key: 'Access-Control-Allow-Origin',
-                        value: '*'
+                        value: 'https://frame-it-app.vercel.app/'
+                    },
+                    {
+                        key: 'Access-Control-Allow-Methods',
+                        value: 'POST'
                     }
                 ]
             }
