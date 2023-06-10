@@ -106,7 +106,7 @@ export default function NavBar({ loader }){
   const handleDownload = async () => {
     console.log("Processing...")
     loader.showLoader()
-    fetch('http://localhost:3000/frame-tweet', {
+    fetch('https://frame-it-app.vercel.app/frame-tweet', {
       cache: 'no-store',
       method: 'POST',
       body: JSON.stringify({ forJson }),
