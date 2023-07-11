@@ -52,6 +52,7 @@ export default function NavBar({ loader }){
     closeButtonRef.current.classList.remove('hidden')
   }
   const closeBox = () => {
+    setLink('')
     searchBoxRef.current.classList.remove('active')
     downloadButtonRef.current.classList.remove('hidden');
     closeButtonRef.current.classList.add('hidden');
@@ -106,7 +107,7 @@ export default function NavBar({ loader }){
   const handleDownload = async () => {
     console.log("Processing...")
     loader.showLoader()
-    fetch('https://frame-it-app.vercel.app/frame-tweet', {
+    fetch('http://localhost:3000/frame-tweet', {
       cache: 'no-store',
       method: 'POST',
       body: JSON.stringify({ forJson }),

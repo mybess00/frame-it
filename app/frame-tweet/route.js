@@ -5,6 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { convert } from 'convert-svg-to-jpeg'
 import TweetMockup from '../../components/TweetMockup'
+import puppeteer from "puppeteer";
 
 function readFileAsArrayBuffer(filePath) {
   return new Promise((resolve, reject) => {
@@ -35,7 +36,7 @@ export async function POST ( request ) {
   
   const res = await request.json();
   const fontType = font(res.forJson.theme.fontStyle)
-
+  console.log(res)
   const filePath = path.join(process.cwd(), 'public', 'fonts', fontType);
   const arrayBuffer = await readFileAsArrayBuffer(filePath);
 
@@ -64,7 +65,8 @@ export async function POST ( request ) {
     },
   )
 
-  const jpeg = await convert(svg);
+  const browser = await puppeteer.launch()
+  const jpeg = await convert(svg, [ browser ]);
   const response = new NextResponse(jpeg, {
     status: 200,
     headers: {
