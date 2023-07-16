@@ -71,7 +71,7 @@ export async function POST ( request ) {
     }, { status: 200 })
   }
 
-
+  return NextResponse.json({"Error": "svg is not defined for satory"}, { status: 500 })
 
 
   /*const browser = await puppeteer.connect({
