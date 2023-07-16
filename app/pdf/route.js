@@ -10,6 +10,8 @@ export async function POST (request) {
     })
   }*/
 
+  //
+
   const browser = await puppeteer.connect({
     browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BLESS_TOKEN}`,
   })
