@@ -7,6 +7,25 @@ import { convert } from 'convert-svg-to-jpeg'
 import TweetMockup from '../../components/TweetMockup'
 import puppeteer from "puppeteer-core";
 
+const svgToPngURL = (svg) =>
+  new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      resolve(canvas.toDataURL("image/png"));
+      URL.revokeObjectURL(img.src);
+    };
+    img.onerror = (e) => {
+      reject(e);
+      URL.revokeObjectURL(img.src);
+    };
+    img.src = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+});
+
 function readFileAsArrayBuffer(filePath) {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, (error, data) => {
@@ -64,10 +83,10 @@ export async function POST ( request ) {
       }
     },
   )
-
-  if (svg) {
+  const pngURL = await svgToPngURL(svg)
+  if (pngURL) {
     return NextResponse.json({
-      svg
+      pngURL
     }, { status: 200 })
   }
 

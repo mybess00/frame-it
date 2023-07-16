@@ -136,9 +136,18 @@ export default function NavBar({ loader }){
         })*/
         const data = await response.json()
         console.log(data)
-        console.log(data["svg"])
         console.log(response)
-        downloadSvgAsPng(data["svg"])
+        const pngURL = data["pngURL"]
+        try {
+          const a = document.createElement("a");
+          a.href = pngURL;
+          a.download = "Image.png";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        } finally {
+          URL.revokeObjectURL(pngURL);
+        }
         loader.hideLoader()
       } else {
         loader.hideLoader()
