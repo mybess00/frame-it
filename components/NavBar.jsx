@@ -115,7 +115,7 @@ export default function NavBar({ loader }){
       headers: {
         'Content-Type': 'application/json',
       }
-    }).then(response => {
+    }).then(async response => {
       console.log("Waiting for response")
       if (response.ok){
         console.log("Trying to download...")
@@ -134,7 +134,8 @@ export default function NavBar({ loader }){
           console.log("Download Finish")
           loader.hideLoader()
         })*/
-        console.log(response.json())
+        const data = await response.json()
+        console.log(data)
         console.log(response)
         downloadSvgAsPng(response.body)
         loader.hideLoader()
