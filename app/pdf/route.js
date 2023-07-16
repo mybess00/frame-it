@@ -18,7 +18,7 @@ export async function POST (request) {
 
   const page = await browser.newPage()
   await page.setViewport({ width: 1920, height: 1080 })
-  await page.goto(url)
+  await page.goto('https://www.estrategiasdeinversion.com/herramientas/diccionario/criptomonedas/bitcoin-t-1817')
 
   return NextResponse.status(200).send(await page.pdf())
 }
