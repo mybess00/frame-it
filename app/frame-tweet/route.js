@@ -35,10 +35,10 @@ const font = (style) => {
 export async function POST ( request ) {
   
   const res = await request.json();
-  const fontType = font(res.forJson.theme.fontStyle)
+ // const fontType = font(res.forJson.theme.fontStyle)
   console.log(res)
-  const filePath = path.join(process.cwd(), 'public', 'fonts', fontType);
-  const arrayBuffer = await readFileAsArrayBuffer(filePath);
+ // const filePath = path.join(process.cwd(), 'public', 'fonts', fontType);
+ // const arrayBuffer = await readFileAsArrayBuffer(filePath);
 
  /* const svg = await satori(
     <TweetMockup props={res.forJson}/>,
