@@ -20,5 +20,5 @@ export async function POST (request) {
   await page.setViewport({ width: 1920, height: 1080 })
   await page.goto('https://www.estrategiasdeinversion.com/herramientas/diccionario/criptomonedas/bitcoin-t-1817')
 
-  return NextResponse.status(200).send(await page.pdf())
+  return NextResponse.send(await page.pdf())
 }
