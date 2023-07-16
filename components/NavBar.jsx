@@ -119,23 +119,9 @@ export default function NavBar({ loader }){
       console.log("Waiting for response")
       if (response.ok){
         console.log("Trying to download...")
-       /* const dispositionHeader = response.headers.get('Content-Disposition');
-        const match = dispositionHeader && dispositionHeader.match(/filename="(.+)"/);
-        const fileName = match ? match[1] : 'image.jpg';
-        
-        return response.blob().then((blob) => {
-          const downloadLink = document.createElement('a');
-          downloadLink.href = URL.createObjectURL(blob);
-          downloadLink.download = fileName;
 
-          downloadLink.click();
-
-          URL.revokeObjectURL(downloadLink.href);
-          console.log("Download Finish")
-          loader.hideLoader()
-        })*/
         console.log(response)
-        downloadSvgAsPng(response.body.svg)
+      //  downloadSvgAsPng(response.body.svg)
         loader.hideLoader()
       } else {
         loader.hideLoader()
