@@ -40,7 +40,7 @@ export async function POST ( request ) {
   const filePath = path.join(process.cwd(), 'public', 'fonts', fontType);
   const arrayBuffer = await readFileAsArrayBuffer(filePath);
 
-  const svg = await satori(
+ /* const svg = await satori(
     <TweetMockup props={res.forJson}/>,
     {
       width: res.forJson.theme.tweetWidth,
@@ -63,8 +63,8 @@ export async function POST ( request ) {
         return null;
       }
     },
-  )
-
+  )*/
+    const svg = [25,80]
   if (svg) {
     NextResponse.json({
       svg
