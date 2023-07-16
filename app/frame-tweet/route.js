@@ -65,7 +65,15 @@ export async function POST ( request ) {
     },
   )
 
-  const browser = await puppeteer.connect({
+  if (svg) {
+    NextResponse.json({
+      svg
+    })
+  }
+
+
+
+  /*const browser = await puppeteer.connect({
     browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BLESS_TOKEN}`
   })
   const jpeg = await convert(svg, [ browser ]);
@@ -78,6 +86,6 @@ export async function POST ( request ) {
     },
   });
 
-  return response
+  return response*/
 }
 

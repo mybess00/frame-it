@@ -4,6 +4,7 @@ import { useRef, useState, useContext } from "react";
 import { BiCloudDownload, BiSearch } from "react-icons/bi"
 import { AiOutlineClose } from "react-icons/ai"
 import { TweetProperties } from "./TweetContext";
+import { downloadSvgAsPng } from "./options/svgToImage.js"
 
 export default function NavBar({ loader }){
 
@@ -118,7 +119,7 @@ export default function NavBar({ loader }){
       console.log("Waiting for response")
       if (response.ok){
         console.log("Trying to download...")
-        const dispositionHeader = response.headers.get('Content-Disposition');
+       /* const dispositionHeader = response.headers.get('Content-Disposition');
         const match = dispositionHeader && dispositionHeader.match(/filename="(.+)"/);
         const fileName = match ? match[1] : 'image.jpg';
         
@@ -132,7 +133,10 @@ export default function NavBar({ loader }){
           URL.revokeObjectURL(downloadLink.href);
           console.log("Download Finish")
           loader.hideLoader()
-        })
+        })*/
+        console.log(response)
+        downloadSvgAsPng(response.body.svg)
+        loader.hideLoader()
       } else {
         loader.hideLoader()
         return console.log(response)
