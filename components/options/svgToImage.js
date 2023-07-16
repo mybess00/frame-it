@@ -1,5 +1,5 @@
 const svgToPngURL = (svg) =>
-  new Promise<string>((resolve, reject) => {
+  new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => {
       const canvas = document.createElement("canvas");
@@ -18,6 +18,10 @@ const svgToPngURL = (svg) =>
   });
 
 export const downloadSvgAsPng = async (svg) => {
+  if (!svg){
+    console.log('No existe SVG')
+    return false
+  }
   const pngURL = await svgToPngURL(svg);
   try {
     const a = document.createElement("a");
