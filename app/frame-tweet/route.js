@@ -65,6 +65,7 @@ export async function POST ( request ) {
     },
   )*/
     const svg = [25,80]
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
   if (svg) {
     NextResponse.json({
       svg
