@@ -138,7 +138,7 @@ export default function NavBar({ loader }){
         console.log(data)
         console.log(data["svg"])
         console.log(response)
-        downloadSvgAsPng(data.svg)
+        downloadSvgAsPng(data["svg"])
         loader.hideLoader()
       } else {
         loader.hideLoader()
