@@ -134,10 +134,10 @@ export default function NavBar({ loader }){
           console.log("Download Finish")
           loader.hideLoader()
         })*/
-        const { svg } = await response.json()
-        console.log(svg)
+        const data = await response.json()
+        console.log(data.svg)
         console.log(response)
-        downloadSvgAsPng(svg)
+        downloadSvgAsPng(data.svg)
         loader.hideLoader()
       } else {
         loader.hideLoader()
