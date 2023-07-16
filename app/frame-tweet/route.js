@@ -35,12 +35,12 @@ const font = (style) => {
 export async function POST ( request ) {
   
   const res = await request.json();
- // const fontType = font(res.forJson.theme.fontStyle)
+  const fontType = font(res.forJson.theme.fontStyle)
   console.log(res)
- // const filePath = path.join(process.cwd(), 'public', 'fonts', fontType);
- // const arrayBuffer = await readFileAsArrayBuffer(filePath);
+  const filePath = path.join(process.cwd(), 'public', 'fonts', fontType);
+  const arrayBuffer = await readFileAsArrayBuffer(filePath);
 
- /* const svg = await satori(
+  const svg = await satori(
     <TweetMockup props={res.forJson}/>,
     {
       width: res.forJson.theme.tweetWidth,
@@ -63,12 +63,12 @@ export async function POST ( request ) {
         return null;
       }
     },
-  )*/
-    const svg = [25,80]
+  )
+    const svgs = [25,80]
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-  if (svg) {
+  if (svgs) {
     NextResponse.json({
-      svg
+      svgs
     })
   }
 
