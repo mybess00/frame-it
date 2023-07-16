@@ -67,10 +67,11 @@ export async function POST ( request ) {
     const svgs = [25,80]
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
   if (svgs) {
-    NextResponse.json({
+    return NextResponse.json({
       svgs
-    })
+    }, { status: 200 })
   }
+
 
 
 
