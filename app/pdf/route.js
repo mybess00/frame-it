@@ -1,0 +1,22 @@
+import { NextResponse } from "next/server";
+import puppeteer from "puppeteer-core";
+
+export async function POST (request) {
+  /*const res = await request.json()
+
+  if (!res) {
+    return new NextResponse( 'Error', {
+      status: 400
+    })
+  }*/
+
+  const browser = await puppeteer.connect({
+    browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BLESS_TOKEN}`,
+  })
+
+  const page = await browser.newPage()
+  await page.setViewport({ width: 1920, height: 1080 })
+  await page.goto(url)
+
+  return NextResponse.status(200).send(await page.pdf())
+}

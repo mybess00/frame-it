@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { convert } from 'convert-svg-to-jpeg'
 import TweetMockup from '../../components/TweetMockup'
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
 
 function readFileAsArrayBuffer(filePath) {
   return new Promise((resolve, reject) => {
@@ -65,7 +65,9 @@ export async function POST ( request ) {
     },
   )
 
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.connect({
+    browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BLESS_TOKEN}`
+  })
   const jpeg = await convert(svg, [ browser ]);
   const response = new NextResponse(jpeg, {
     status: 200,
